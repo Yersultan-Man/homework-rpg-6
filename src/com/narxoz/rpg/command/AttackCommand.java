@@ -5,7 +5,7 @@ import com.narxoz.rpg.arena.ArenaOpponent;
 public class AttackCommand implements ActionCommand {
     private final ArenaOpponent target;
     private final int attackPower;
-    private int damageDealt;
+    private int damageDealt = 0;
 
     public AttackCommand(ArenaOpponent target, int attackPower) {
         this.target = target;
@@ -14,20 +14,20 @@ public class AttackCommand implements ActionCommand {
 
     @Override
     public void execute() {
-        // TODO: Deal attackPower damage to the target using target.takeDamage(int).
-        // TODO: Store the actual damage dealt in damageDealt so that undo() can reverse it exactly.
-        // TODO: Consider: should damageDealt be capped at the target's remaining health?
+        damageDealt = attackPower; // сохраняем сколько реально нанесли
+        target.takeDamage(attackPower);
+        // Если противник имел меньше HP, takeDamage уже зажмёт до 0
     }
 
     @Override
     public void undo() {
-        // TODO: Restore the stored damageDealt to the target using target.restoreHealth(int).
-        // Note: Use damageDealt (what was actually applied), not attackPower.
+        if (damageDealt > 0) {
+            target.restoreHealth(damageDealt);
+        }
     }
 
     @Override
     public String getDescription() {
-        // TODO: Return a readable summary, e.g. "Attack for 18 damage".
-        return "TODO";
+        return "Attack for " + attackPower + " damage";
     }
 }
