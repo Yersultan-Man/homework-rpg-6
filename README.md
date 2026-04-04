@@ -72,6 +72,19 @@ java -cp out com.narxoz.rpg.Main
 ```
 
 ---
+## UML-диаграммы
+
+### Chain 
+
+![Chain](diagrams/Chain.png)
+
+### command
+![command](diagrams/Command.png)
+
+## Вывод программы
+
+## Ссылка на код
+https://github.com/Yersultan-Man/homework-rpg-6.git
 
 ## Deliverables
 
